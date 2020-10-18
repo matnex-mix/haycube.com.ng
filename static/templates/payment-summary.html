@@ -1,0 +1,60 @@
+!!uses=layout!!
+
+!!block title!!
+	Haycube &raquo; Payment Confirmation
+!!endblock!!
+
+!!block content!!
+	<div class="w-100 mx-auto" style="max-width: 489px">
+		<br/>
+		<h5>Payment Summary</h5>
+		<br/>
+
+		<table class="table border">
+			<tr>
+				<th class="bg-light" align="left"><span style="white-space: nowrap;">Unique User ID</span></th>
+				<td><span style="word-break: break-all;">
+					!!data.email!!
+				</span></td>
+			</tr>
+			<tr>
+				<th class="bg-light" align="left"><span style="white-space: nowrap;">Transaction Id</span></th>
+				<td>!!data.ref!!
+					<br/><small>&nbsp;&nbsp;(<b>kindly note this down</b>)</small>
+				</td>
+			</tr>
+			<tr>
+				<th class="bg-light" align="left"><span style="white-space: nowrap;">Amount</span></th>
+				<td>!!Currency::sym()!!!!data.amount!!</td>
+			</tr>
+			<tr>
+				<th class="bg-light" align="left"><span style="white-space: nowrap;">Timestamp</span></th>
+				<td><mark class="badge">!!data.date!!</mark></td>
+			</tr>
+			<tr>
+				<th class="bg-light" align="left"><span style="white-space: nowrap;">Status</span></th>
+				<td>
+					!!var status=$this->Template_Data['data']['status']!!
+					!!if status!!
+						<mark class="badge badge-success">success</mark>
+					!!endif!!
+					!!if !status!!
+						<mark class="badge badge-danger">error</mark>
+					!!endif!!
+				</td>
+			</tr>
+			<tr>
+				<th class="bg-light" align="left"><span style="white-space: nowrap;">Response</span></th>
+				<td>!!data.response!!</td>
+			</tr>
+		</table>
+		<br/>
+		<a href="!!F::route('cart')!!">&larr; &nbsp;Back to Cart</a>
+	</div>
+!!endblock!!
+
+!!block style!!
+!!endblock!!
+
+!!block script!!
+!!endblock!!

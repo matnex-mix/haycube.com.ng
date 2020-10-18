@@ -1,0 +1,59 @@
+<form method="post" action="!!table_action!!" class="" autocomplete="off">
+	!!if config['check_option']!==0!!
+	<div class="d-flex my-4">
+		<select name="o">
+			!!for table_options!!
+			<option>!!this!!</option>
+			!!endfor!!
+		</select>
+		<button class="btn btn-primary ml-3" type="submit">
+			Apply
+		</button>
+	</div>
+	!!endif!!
+
+	<div class="table-responsive">
+		<table class="table table-striped table-highlight border">
+			<tr>
+				!!if config['check_option']!==0!!
+				<th>
+					<input id="check" type="checkbox" name="" onclick="$('.check').prop( 'checked', this.checked );" />
+				</th>
+				!!endif!!
+
+				!!if config['table_option']!==0!!
+				<td></td>
+				!!endif!!
+
+				!!for table_heading!!
+				<th>!!this!!</th>
+				!!endfor!!
+			</tr>
+
+			((for data))
+				<tr id="((this.id))">
+					!!if config['check_option']!==0!!
+					<td>
+						<input type="checkbox" class="check" name="item_((ithis))" value="((this.id))" onclick="if( !this.checked ) $('#check').prop( 'checked', false );" />
+					</td>
+					!!endif!!
+
+					!!if config['table_option']!==0!!
+					<td style="white-space: nowrap;">
+						!!for row_options!!
+						<a href="!!ithis!!((this.id))">
+							!!this!!
+						</a>
+						&nbsp;&nbsp;
+						!!endfor!!
+					</td>
+					!!endif!!
+
+					!!for data_fields!!
+					<td>!!this!!</td>
+					!!endfor!!
+				</tr>
+			((endfor))
+		</table>
+	</div>
+</form>

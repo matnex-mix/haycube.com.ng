@@ -1,0 +1,84 @@
+!!(function(){
+	if( !isset($_SESSION['cart']) ){
+		$_SESSION['cart'] = [];
+	}
+})();!!
+
+<div class="navbar navbar-dark navbar-expand-sm bg-dark fixed-to z-depth-0 my blue">
+	<a href="!!F::route('')!!" class="navbar-brand white-text">
+		<div class="d-inline-flex align-items-center">
+			<img src="!!F::route('logo.png')!!" height="35">
+			<span class="ml-2"></span>
+			<font color="tomato" style="font-family: 'Arial Rounded MT Bold'; font-size: x-large;">
+				&nbsp;<font color="#109beb">Hay</font>cube
+			</font>
+		</div>
+	</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+		<span class="fa fa-2x fa-bars"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbar">
+		<ul class="navbar-nav ml-auto align-items-center">
+			!!var dash=(int)!empty($this->Template_Data['dashboard'])!!
+			!!if dash==1!!
+			<li class="nav-item ml-sm-5">
+				<a href="!!F::route('account/dashboard')!!" class="my nav-link -blue-text" style="color: violet !important">
+					<i class="fa fa-tachometer-alt"></i>
+					&nbsp;
+					Dashboard
+				</a>
+			</li>
+			!!endif!!
+
+			<li class="nav-item ml-sm-5">
+				!!var logged=(int)boolval(F::sess('auth_user'))!!
+				!!if logged==0!!
+				<a href="!!F::route('account/')!!" class="my nav-link -blue-text" style="color: violet !important">
+					<i class="far fa-user"></i>
+					&nbsp;
+					My Account
+				</a>
+				!!endif!!
+
+				!!if logged!=0!!
+				<a href="!!F::route('account/logout')!!" class="my nav-link -blue-text" style="color: violet !important">
+					<i class="fa fa-power-off"></i>
+					&nbsp;
+					Logout
+				</a>
+				!!endif!!
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="bg-light d-flex p-2 align-items-center" style="position: sticky; top: 0; z-index: 999999">
+	<form id="locale" action="!!F::route('forms/locale')!!" class="d-flex align-items-center">
+		<div class="d-none d-sm-block">
+			<i class="fas fa-globe fa-lg"></i>
+		</div>
+		<div class="ml-3">
+			<select name="language" class="form-control" onchange="$('#proceed').val(location.href); $('#locale').submit();">
+				!!var lang=F::sess('language')!!
+				<option value="english" !!if lang=='english'!! selected !!endif!! >English</option>
+				<option value="arabic" !!if lang=='arabic'!! selected !!endif!!>Arabic</option>
+				<option value="chinese" !!if lang=='chinese'!! selected !!endif!!>Chinese</option>
+				<option value="hindi" !!if lang=='hindi'!! selected !!endif!!>Hindi</option>
+			</select>
+		</div>
+		<div class="ml-4">
+			!!var currency=Currency::all()!!
+			<select name="currency" class="form-control" onchange="$('#proceed').val(location.href); $('#locale').submit();">
+				!!for currency!!
+					!!var selected=$this->Template_Data['this']['id']==Currency::current()!!
+					<option value="!!this.id!!" !!if selected==1!!selected!!endif!!>!!this.abbr!! (!!this.symbol!!)</option>
+				!!endfor!!
+			</select>
+		</div>
+		<input id="proceed" type="hidden" name="proceed" value="" />
+	</form>
+	<a href="!!F::route('cart')!!" class="my nav-link text-dark -a-dark ml-auto">
+		<i class="fa fa-shopping-cart"></i> <small class="badge badge-danger badge-pill">
+			!!sizeof($_SESSION['cart'])!!
+		</small> (!!Currency::sym()!!!!Cart::total()!!)
+	</a>
+</div>

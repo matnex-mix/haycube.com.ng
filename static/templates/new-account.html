@@ -1,0 +1,64 @@
+!!uses=layout!!
+
+!!block title!!
+	Haycube &raquo; Create Account
+!!endblock!!
+
+!!block content!!
+	<div class="fixed-top h-100 bg-dark">
+		<div class="h-100 w-100 d-flex align-items-center justify-content-center p-4" style="background: rgba(0,0,0,0.7);">
+			<form action="!!F::route('forms/signup')!!" method="post" class="border bg-light p-3 p-sm-4 rounded w-100" style="max-width: 360px" autocomplete="off" onsubmit="if( this.hay_pass.value!=this.hay_cpass.value ){ alert('Passwords do not match'); return false; }">
+				<h4 class="text-center text-uppercase">
+					<b>Create Account</b>
+				</h4>
+
+				!!var error=F::get('error')!!
+				!!if error!=''!!
+				<small class="alert alert-danger mt-3 p-2 d-block">
+					&nbsp;&nbsp;!!error!!
+				</small>
+				!!endif!!
+
+				!!var success=F::get('success')!!
+				!!if success!=''!!
+				<small class="alert alert-success mt-3 p-2 d-block">
+					&nbsp;&nbsp;!!success!!
+				</small>
+				!!endif!!
+
+				<div class="my-3">
+					<label class="form-label-text"><small>Your Name</small></label>
+					<input type="text" name="hay_name" class="w-100 form-control" placeholder="Full Name" value="!!F::get('hay_name')!!" required />
+				</div>
+				<div class="my-3">
+					<label class="form-label-text"><small>Your Email</small></label>
+					<input type="email" name="hay_uname" class="w-100 form-control" placeholder="Email Address" value="!!F::get('hay_uname')!!" required />
+				</div>
+				<div class="my-3">
+					<label class="form-label-text"><small>Password</small></label>
+					<input type="password" name="hay_pass" class="w-100 form-control" placeholder="******" required />
+				</div>
+				<div class="my-3">
+					<label class="form-label-text"><small>Re-type Password</small></label>
+					<input type="password" name="hay_cpass" class="w-100 form-control" placeholder="******" required />
+				</div>
+				<button type="submit" class="btn btn-warning btn-sm w-100 mt-2">SIGN UP</button>
+				<div class="mt-3 text-center">
+					<small>
+						<a href="!!F::route('')!!">home</a>
+						<strong>&nbsp;|&nbsp;</strong>
+						<a href="!!F::route('account/login')!!">login</a>
+						<br/>
+						&copy; Haycube !!Date('Y')!!
+					</small>
+				</div>
+			</form>
+		</div>
+	</div>
+!!endblock!!
+
+!!block style!!
+!!endblock!!
+
+!!block script!!
+!!endblock!!

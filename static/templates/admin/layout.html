@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html style='overflow-x: hidden'>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name='viewport' content='width=device-width,initial-scale=1.0'>
+		<link rel='icon' href='!!F::route('logo.jpg')!!'>
+
+		<link rel='stylesheet' href='!!F::static("minify/bootstrap.min.css")!!' type='text/css'>
+		<link rel='stylesheet' href='!!F::static("minify/fontawesome5/css/all.min.css")!!' type='text/css'>
+		<link rel='stylesheet' href='!!F::static("css/style.css")!!' type='text/css'>
+
+		<script src='!!F::static("minify/jquery.min.js")!!'></script>
+		<script src='!!F::static("minify/bootstrap.bundle.min.js")!!'></script>
+		<script src='!!F::static("minify/chart.bundle.min.js")!!'></script>
+		<script src='!!F::static("minify/jaxify.js")!!'></script>
+
+		<title>!!block=title!!</title>
+	</head>
+
+	<style type="text/css">
+
+		#main {
+			margin-top: 116px;
+		}
+		
+		@media (min-width: 992px) {
+
+			#navbar {
+				display: block !important;
+			}
+
+			#navbar .dropdown-menu {
+				position: static !important;
+				max-width: 100% !important;
+				min-width: unset;
+				margin: 10px 0 !important;
+			}
+
+			#navbar-toggler {
+				display: none !important;
+			}
+
+			#main {
+				width: calc( 100% - 160px );
+				margin-top: 53px;
+				margin-left: 160px;
+			}
+
+			#nav-bar {
+				max-width: 160px;
+				height: calc(100% - 53px);
+			}
+
+		}
+
+	</style>
+
+	<body>
+		<header>
+			<div class="fixed-top d-flex py-2 px-4 align-items-center bg-dark">
+				<h6 class="m-0">
+					<a href="!!F::route('admin')!!" style="color: tomato;">
+						<b>Admin Dashboard</b>
+					</a>
+				</h6>
+				<a href="!!F::route( 'admin/logout' )!!" class="btn ml-auto" style="color: tomato;">
+					<i class="fa fa-power-off"></i>
+				</a>
+			</div>
+
+			<div id="nav-bar" class="fixed-top bg-dark border-top border-secondary" style="background: #444; top: 53px;">
+				<div class="navbar navbar-dark navbar-expand-md">
+
+					<button id="navbar-toggler" class="navbar-toggler py-2 mx-auto" type="button" data-toggle="collapse" data-target="#navbar">
+						<i class="fa fa-lg fa-bars"></i>
+					</button>
+
+					<div id="navbar" class="collapse navbar-collapse">
+						<ul class="navbar-nav flex-lg-column">
+							<li class="nav-item dropdown">
+								<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="admin-drop">
+									<i class="fa fa-user-ninja"></i>&nbsp;&nbsp; ADMINS
+								</a>
+								<div id="admin-drop" class="dropdown-menu rounded-0 m-0">
+									<a href="!!F::route('admin/!/admins/add')!!" class="dropdown-item">
+										<small>
+											<i class="fa fa-plus-circle"></i>&nbsp;&nbsp; Add
+										</small>
+									</a>
+									<a href="!!F::route('admin/!/admins')!!" class="dropdown-item">
+										<small>
+											<i class="fa fa-list"></i>&nbsp;&nbsp; All admins
+										</small>
+									</a>
+								</div>
+							</li>
+
+							<li class="nav-item">
+								<a href="!!F::route('admin/!/users')!!" class="nav-link">
+									<i class="fa fa-users"></i>&nbsp;&nbsp; USERS
+								</a>
+							</li>
+
+							<li class="nav-item dropdown">
+								<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="pics-drop">
+									<i class="fa fa-images"></i>&nbsp;&nbsp; PICTURES
+								</a>
+								<div id="pics-drop" class="dropdown-menu rounded-0 m-0">
+									<a href="!!F::route('admin/!/pictures/add')!!" class="dropdown-item">
+										<small>
+											<i class="fa fa-plus-circle"></i>&nbsp;&nbsp; Add
+										</small>
+									</a>
+									<a href="!!F::route('admin/!/pictures')!!" class="dropdown-item">
+										<small>
+											<i class="fa fa-list"></i>&nbsp;&nbsp; View all
+										</small>
+									</a>
+								</div>
+							</li>
+
+							<li class="nav-item">
+								<a href="!!F::route('admin/!/orders')!!" class="nav-link">
+									<i class="fa fa-chart-line"></i>&nbsp;&nbsp; ORDERS
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="!!F::route('admin/!/payments')!!" class="nav-link">
+									<i class="fa fa-money-check-alt"></i>&nbsp;&nbsp; PAYMENTS
+								</a>
+							</li>
+
+							<li class="nav-item dropdown">
+								<a href="javascript:void(0)" class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="curr-drop">
+									<i class="fa fa-dollar-sign"></i>&nbsp;&nbsp; CURRENCY
+								</a>
+								<div id="curr-drop" class="dropdown-menu rounded-0 m-0">
+									<a href="!!F::route('admin/!/currency/add')!!" class="dropdown-item">
+										<small>
+											<i class="fa fa-plus-circle"></i>&nbsp;&nbsp; Add
+										</small>
+									</a>
+									<a href="!!F::route('admin/!/currency')!!" class="dropdown-item">
+										<small>
+											<i class="fa fa-list"></i>&nbsp;&nbsp; show all
+										</small>
+									</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<div id="main" class="p-3">
+			!!block=content!!
+		</div>
+
+		<script type="text/javascript">
+			selectValues = $('select[value!=\'\']');
+
+			selectValues.each(function( e ){
+				f = selectValues[e];
+
+				for( x=0; x <f.length; x++ ){
+					d = f[x];
+					_e = f.getAttribute('value');
+
+					if( d.value.trim()==_e || d.innerText.trim()==_e ){
+						d.selected = true;
+						return;
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

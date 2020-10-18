@@ -1,0 +1,29 @@
+!!uses=layout!!
+
+!!block title!!
+HayCube > 404 [Not Found]
+!!endblock!!
+
+!!block content!!
+	<div class="w-100 h-100 position-fixed d-flex justify-content-center align-items-center p-4" style="top: 0; left: 0">
+		<div class="shadow p-4 w-100 rounded" style="max-width: 456px">
+			<h2>
+				<b>404</b>
+			</h2>
+			<h5>Page Not Found</h5>
+			<p>
+				the page you requested (<a href="!!F::route(__SEEK)!!">!!F::route(__SEEK)!!</a>) was not found, it may have been moved or deleted. If you think this is not right kindly <a href="!!F::route('contact?&group=broken-link&subject='.urlencode(F::route(__SEEK).' is broken'))!!">contact</a> the webmasters
+			</p>
+			<small>
+				&copy; HayCube !!Date('Y')!!.
+				<a href="!!F::route('')!!" class="ml-2">Home</a>
+			</small>
+		</div>
+	</div>
+!!endblock!!
+
+!!block script!!
+!!endblock!!
+
+!!block style!!
+!!endblock!!

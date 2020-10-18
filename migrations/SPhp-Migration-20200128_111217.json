@@ -1,0 +1,46 @@
+"create": {
+	"order": {
+		"id": {
+			"type": "int",
+			"auto_increment": true,
+			"primary": true
+		},
+		"user": {
+			"type": "int"
+		},
+		"collection": {
+			"type": "int"
+		},
+		"downloads": {
+			"type": "tinyint"
+		}
+	},
+	"user": {
+		"id": {
+			"type": "int",
+			"auto_increment": true,
+			"primary": true
+		},
+		"name": {
+			"type": "varchar",
+			"length": 50
+		},
+		"email": {
+			"type": "varchar",
+			"length": 50,
+			"unique": true
+		},
+		"password": {
+			"type": "varchar",
+			"length": 50
+		},
+		"token": {
+			"type": "varchar",
+			"length": 100
+		},
+		"created_at": {
+			"type": "datetime",
+			"length": 1
+		}
+	}
+}

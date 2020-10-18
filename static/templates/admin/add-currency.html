@@ -1,0 +1,33 @@
+!!uses=admin/layout!!
+
+!!block title!!
+	Haycube Admin &raquo; Add Currency
+!!endblock!!
+
+!!block content!!
+
+	<form method="post" action="!!action!!" class="mx-auto w-100 mt-4 border bg-light rounded p-4" style="max-width: 366px">
+		
+		<h5 class="mb-3">Add Currency</h5>
+
+		!!include=admin/message!!
+
+		<small class="d-block mb-2">Abbreviation</small>
+		<input type="text" name="abbr" class="form-control" placeholder="Abbreviation e.g USD" value="!!F::get_param('abbr')!!" />
+		<br/>
+
+		<small class="d-block mb-2">Symbol</small>
+		<input type="text" name="symbol" class="form-control" placeholder="Symbol e.g $" value="!!F::get_param('symbol')!!" />
+		<br/>
+
+		<small class="d-block mb-2">Rate to Naira</small>
+		<input type="text" name="rate" class="form-control" placeholder="Rate e.g 365.01" value="!!F::get_param('rate')!!" />
+		<br/>
+
+		<button class="btn btn-danger w-100" type="submit" >
+			ADD
+		</button>
+
+	</form>
+
+!!endblock!!

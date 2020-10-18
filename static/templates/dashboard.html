@@ -1,0 +1,92 @@
+!!uses=account-layout!!
+
+!!block title!!
+Haycube &raquo; Dashboard
+!!endblock!!
+
+!!block content!!
+	<div class="row">
+		<div class="col-12 col-md-6 col-lg-4 mb-5">
+			!!var error=F::get('error')!!
+			!!var success=F::get('message')!!
+
+			!!if error!=''!!
+			<div class="bg-white shadow border-left border-danger p-3 mb-2" style="border-width: 5px !important;">
+				&nbsp;&nbsp;!!error!!
+			</div>
+			!!endif!!
+
+			!!if success!=''!!
+			<div class="bg-white shadow border-left border-success p-3" style="border-width: 5px !important;">
+				&nbsp;&nbsp;!!success!!
+			</div>
+			!!endif!!
+		</div>
+		<div class="col-12 col-md-6 col-lg-4 mb-5">
+			<div class="border bg-light p-4">
+				<h5 class="mb-3"><b>Profile</b></h5>
+				<form method="post" action="!!F::route('forms/account-profile')!!">
+					<label class="form-input-text">
+						<small>Full Name</small>
+					</label>
+					<input type="text" name="name" value="!!user.name!!" class="form-control form-control-sm" placeholder="e.g John Doe" />
+					<label class="form-input-text mt-3">
+						<small>Email Address</small>
+					</label>
+					<input type="email" name="email" value="!!user.email!!" class="form-control form-control-sm" placeholder="e.g example@domain.com" />
+					<br/>
+					<div class="text-right">
+						<button name="__init__" class="btn btn-sm btn-secondary">
+							SAVE
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-12 col-md-6 col-lg-4 mb-5">
+			<div class="border bg-light p-4">
+				<h5 class="mb-3"><b>Password Change</b></h5>
+				<form method="post" action="!!F::route('forms/account-password')!!">
+					<label class="form-input-text">
+						<small>Old Password</small>
+					</label>
+					<input type="password" name="old" value="" class="form-control form-control-sm" placeholder="* * * * * *" required />
+					<label class="form-input-text mt-3">
+						<small>New Password</small>
+					</label>
+					<input type="password" name="new" value="" class="form-control form-control-sm" placeholder="* * * * * *" required />
+					<br/>
+					<div class="text-right">
+						<button name="__init__" class="btn btn-sm btn-secondary">
+							SAVE
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-12 col-lg-6 mb-4">
+			<div class="d-flex justify-content-between align-items-center">
+				<h4><b>Payments</b></h4>
+				<a href="!!F::route('account/payments')!!" class="btn btn-secondary btn-sm">
+					Show All
+				</a>
+			</div>
+			!!include=payment-table!!
+		</div>
+		<div class="col-12 col-lg-6 mb-4">
+			<div class="d-flex justify-content-between align-items-center mb-4">
+				<h4><b>My Collection</b></h4>
+				<a href="!!F::route('account/collection')!!" class="btn btn-secondary btn-sm">
+					Show All
+				</a>
+			</div>
+			<div class="row">
+				!!for my_collections!!
+				<div class="col-12 col-sm-6">
+					!!include=my-collection-each!!
+				</div>
+				!!endfor!!
+			</div>
+		</div>
+	</div>
+!!endblock!!

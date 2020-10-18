@@ -1,0 +1,126 @@
+!!uses=layout!!
+
+!!block title!!
+Haycube > Contact Us
+!!endblock!!
+
+!!block content!!
+	!!include=header!!
+
+	<div class="p-4 p-md-5">
+		<div class="row">
+			<div class="col-12 col-lg-4">
+				<div class="row">
+					<div class="col-12 col-sm-6 col-lg-12">
+						<div class="rounded border border-success bg-success p-3 mb-3">
+							<div class="">
+								<i class="fab fa-whatsapp fa-2x"></i>
+								&nbsp;
+								<b>WhatsApp</b>
+							</div>
+							<h4 class="text-white mt-2">
+								+234 705 9906 476
+							</h4>
+						</div>
+					</div>
+					<div class="col-12 col-sm-6 col-lg-12">
+						<div class="rounded border border-primary bg-primary p-3 mb-3">
+							<div class="">
+								<i class="fab fa-facebook fa-2x"></i>
+								&nbsp;
+								<b>Facebook</b>
+							</div>
+							<h4 class="text-white mt-2">
+								haycube
+							</h4>
+						</div>
+					</div>
+					<div class="col-12 col-sm-6 col-lg-12">
+						<div class="rounded border p-3 mb-3" style="border-color: brown !important; background: brown">
+							<div class="">
+								<i class="fab fa-instagram fa-2x"></i>
+								&nbsp;
+								<b>Instagram</b>
+							</div>
+							<h4 class="text-white mt-2">
+								haycube.studio
+							</h4>
+						</div>
+					</div>
+					<div class="col-12 col-sm-6 col-lg-12">
+						<div class="rounded border border-danger bg-danger p-3 mb-3">
+							<div class="">
+								<i class="fab fa-google-mail fa-2x"></i>
+								&nbsp;
+								<b>Email</b>
+							</div>
+							<h4 class="text-white mt-2">
+								haycube@gmail.com
+							</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-lg-8">
+				<form action="!!F::route('forms/contact')!!" method="post" class="form-row">
+					<div class="col-12">
+						<div class="alert alert-success">!!success!!</div>
+						<div class="alert alert-danger">!!for error!!**&nbsp;&nbsp;!!this!!<br/>!!endfor!!</div>
+					</div>
+					<div class="col-12">
+						<h3>
+							Contact Us
+						</h3>
+						<p>
+							please fill in all details, they are <font class="text-danger">required</font>!
+						</p>
+					</div>
+					<div class="col-12 col-sm-6 mb-3">
+						<label class="form-label">&nbsp;&nbsp;Full Name:</label>
+						<input type="text" name="name" class="form-control" placeholder="Name" value="!!name!!" required />
+					</div>
+					<div class="col-12 col-sm-6 mb-3">
+						<label class="form-label">&nbsp;&nbsp;Email Address:</label>
+						<input type="email" name="email" class="form-control" placeholder="Email" value="!!email!!" required />
+					</div>
+					<div class="col-12">
+						<label class="form-label">&nbsp;&nbsp;Message Group:</label>
+						!!var msg_group=array(
+							"inquiry" => "INQUIRY",
+							"request-photo" => "REQUEST PHOTO",
+							"broken-link" => "BROKEN-LINK",
+							"support-ticket" => "SUPPORT TICKET"
+						)!!
+						<select class="form-control" name="group" required>
+							!!for msg_group!!
+								<option value="!!ithis!!" !!if ithis==group!!selected!!endif!!>!!this!!</option>
+							!!endfor!!
+						</select>
+					</div>
+					<div class="col-12 mt-3">
+						<label class="form-label">&nbsp;&nbsp;Message Subject: <small>(200)</small></label>
+						<input type="text" name="subject" class="form-control" placeholder="Subject" maxlength="200" value="!!subject!!" required />
+					</div>
+					<div class="col-12 mt-3">
+						<label class="form-label">&nbsp;&nbsp;Message: <small>(1000)</small></label>
+						<textarea name="message" class="form-control" rows="8" required>!!message!!</textarea>
+					</div>
+					<div class="col-12 mt-4">
+						<input type="submit" name="__init__" class="btn btn-dark" value="Send" style="width: 100px" maxlength="1000" required />
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	!!include=footer!!
+!!endblock!!
+
+!!block style!!
+	.alert:empty{
+		display: none !important;
+	}
+!!endblock!!
+
+!!block script!!
+!!endblock!!

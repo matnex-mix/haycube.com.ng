@@ -1,0 +1,9 @@
+"alter": {
+	"collections": {
+		"uri": {
+			"name": "file",
+			"type": "varchar",
+			"length": 100
+		}
+	}
+}

@@ -1,0 +1,18 @@
+<div class="table-responsive mt-4">
+	<table class="border table table-striped">
+		<tr>
+			<th>Ref. ID</th>
+			<th>Amount(!!Currency::sym()!!)</th>
+			<th>Via</th>
+			<th>Date</th>
+		</tr>
+		!!for payments!!
+		<tr>
+			<td>!!this.tid!!</td>
+			<td>!!Currency::sym()!!!!this.amount!!</td>
+			<td>!!this.with!!</td>
+			<td>!!this.date!!</td>
+		</tr>
+		!!endfor!!
+	</table>
+</div>

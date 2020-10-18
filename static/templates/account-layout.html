@@ -1,0 +1,69 @@
+!!uses=layout!!
+
+!!block title!!
+	!!block=title!!
+!!endblock!!
+
+!!block content!!
+	!!include=header!!
+
+	<div class="p-3 p-md-5">
+		<div class="row">
+			<div class="col-md-3 p-0 d-none">
+				<a href="" class="nav-link bg-light text-dark border border-bottom-0">
+					<i class="fa fa-tachometer-alt"></i>
+					<span>&nbsp;&nbsp;&nbsp;Dashboard</span>
+				</a>
+				<a href="" class="nav-link bg-light text-dark border border-bottom-0">
+					<i class="fa fa-images"></i>
+					<span>&nbsp;&nbsp;&nbsp;My Collection&nbsp;&nbsp;</span>
+					<small class="badge badge-success badge-pill">2</small>
+				</a>
+				<a href="" class="nav-link bg-light text-dark border">
+					<i class="fa fa-cash-register"></i>
+					<span>&nbsp;&nbsp;&nbsp;Payments&nbsp;&nbsp;</span>
+					<small class="badge badge-danger badge-pill">1</small>
+				</a>
+				<a href="" class="nav-link bg-light text-dark border">
+					<i class="fa fa-lock"></i>
+					<span>&nbsp;&nbsp;&nbsp;Change Password&nbsp;&nbsp;</span>
+				</a>
+			</div>
+			<div class="col-12">
+				!!block=content!!
+			</div>
+		</div>
+	</div>
+
+	!!include=footer!!
+!!endblock!!
+
+!!block style!!
+	.product{
+		display: block;
+		text-decoration: none;
+		position: relative;
+		overflow: hidden;
+	}
+	.product .details{
+		position: absolute;
+		bottom: 0; left: 0;
+		width: 100%; height: 0%;
+		overflow: hidden;
+		background: rgba(189,222,0,0.7);
+	}
+	.product:hover .details{
+		animation: slideUp .5s forwards;
+	}
+	@keyframes slideUp{
+		from {
+			height: 0%;
+		}
+		to {
+			height: 100%;
+		}
+	}
+!!endblock!!
+
+!!block script!!
+!!endblock!!

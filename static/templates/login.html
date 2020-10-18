@@ -1,0 +1,62 @@
+!!uses=layout!!
+
+!!block title!!
+	Haycube &raquo; Login
+!!endblock!!
+
+!!block content!!
+	<div class="fixed-top h-100 bg-dark">
+		<div class="h-100 w-100 d-flex align-items-center justify-content-center p-4" style="background: rgba(0,0,0,0.7);">
+			<form !!if admin!! action="!!admin!!" !!endif!! action="!!F::route('forms/login')!!" method="post" class="border bg-light p-3 p-sm-4 rounded w-100" style="max-width: 360px" autocomplete="off">
+				<h4 class="text-center text-uppercase">
+					<b>!!if admin!! Admin !!endif!! Login</b>
+				</h4>
+
+				!!var error=F::get('error')!!
+				!!if error!=''!!
+				<small class="alert alert-danger mt-3 p-0 d-block">
+					&nbsp;&nbsp;!!error!!
+				</small>
+				!!endif!!
+
+				<div class="my-3">
+					<label class="form-label-text"><small>Username</small></label>
+					<input type="text" name="hay_uname" class="w-100 form-control" placeholder="Email Address" value="!!F::get('hay_uname')!!" />
+				</div>
+				<div class="my-3">
+					<label class="form-label-text"><small>Password</small></label>
+					<input type="password" name="hay_pass" class="w-100 form-control" placeholder="******" value="!!F::get('hay_pass')!!" />
+				</div>
+
+				!!if admin!!
+				<button type="submit" class="btn btn-warning btn-sm my-2 w-100" name="__init__">LOGIN</button>
+				!!endif!!
+
+				!!if !admin!!
+				<div class="d-flex justify-content-between">
+					<div class="form-check">
+						<input type="checkbox" name="hay_me" class="form-check-input" value="1" !!F::showWhen('checked', F::get('hay_me'))!! />
+						<label class="form-check-text"><small>Remember Me?</small></label>
+					</div>
+					<button type="submit" class="btn btn-warning btn-sm" name="__init__">LOGIN</button>
+				</div>
+				<div class="mt-3 text-center">
+					<small>
+						<a href="!!F::route('account/recovery')!!">forgot password</a>
+						<strong>&nbsp;|&nbsp;</strong>
+						<a href="!!F::route('account/new')!!">create account</a>
+						<br/>
+						&copy; Haycube !!Date('Y')!!
+					</small>
+				</div>
+				!!endif!!
+			</form>
+		</div>
+	</div>
+!!endblock!!
+
+!!block style!!
+!!endblock!!
+
+!!block script!!
+!!endblock!!

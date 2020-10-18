@@ -1,0 +1,13 @@
+{
+	"URL": "http://localhost/haycube",
+	"HOME": "/haycube",
+	"DBNAME": "haycube",
+	"DBUSER": "admin",
+	"DBPASS": "admin",
+	"DBHOST": "localhost",
+	"LANGUAGE": "english",
+	"RECOVERY": {
+		"pass": "pink",
+		"signature": "SIGNATURE"
+	}
+}

@@ -1,0 +1,62 @@
+!!uses=admin/layout!!
+
+!!block title!!
+	Haycube Admin &raquo; Add Picture
+!!endblock!!
+
+!!block content!!
+
+	<form method="post" action="!!action!!" enctype="multipart/form-data" class="mx-auto w-100 mt-4 border bg-light rounded p-4" style="max-width: 366px">
+		
+		<h5 class="mb-3">Add Picture</h5>
+
+		!!include=admin/message!!
+
+		<input type="file" name="file" accept="image/*" class="d-none" />
+		<div id="image" class="-b-image border my-3 w-100" style="background-image: url('!!F::uploads('')!!!!F::get_param( 'file' )!!'); height: 244px;">
+			<div class="w-100 h-100 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.4); cursor: pointer !important;" onclick="openUpload( 'file' );">
+				<i class="fa fa-lg fa-image" style="color: tomato"></i>
+			</div>
+		</div>
+
+		<small class="d-block mb-2">Picture Title</small>
+		<input type="text" name="title" class="form-control" placeholder="e.g John Doe's Photograph" value="!!F::get_param('title')!!" />
+		<br/>
+
+		<small class="d-block mb-2">Description</small>
+		<textarea name="text" class="form-control">!!F::get_param('text')!!</textarea>
+		<br/>
+
+		<small class="d-block mb-2">Price</small>
+		<input type="text" name="price" class="form-control" placeholder="Price" value="!!F::get_param('price')!!" />
+		<br/>
+
+		<small class="d-block mb-2">Discount</small>
+		<input type="text" name="discount" class="form-control" placeholder="Discount" value="!!F::get_param('discount')!!" />
+		<br/>
+
+		<small class="d-block mb-2">Tags ( <em>seperate each entry by comma (,)</em> )</small>
+		<textarea name="tags" class="form-control">!!F::get_param('tags')!!</textarea>
+		<br/>
+
+		<button class="btn btn-danger w-100" type="submit" >
+			ADD
+		</button>
+
+	</form>
+
+	<script type="text/javascript">
+		
+		function openUpload( name ) {
+			$('[name="'+name+'"]').on('change', function(){
+				$('#image')[0].style.backgroundImage = 'url('+window.URL.createObjectURL(this.files[0])+')';
+				$('#image').on('load', function(){
+					window.URL.revokeObjectURL(this.src);
+				});
+			});
+			$('[name="'+name+'"]').click();
+		}
+
+	</script>
+
+!!endblock!!

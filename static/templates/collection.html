@@ -1,0 +1,40 @@
+!!for collections!!
+<div class="col-sm-6 col-md-4 col-lg-3 py-4">
+	<a href="!!F::route('')!!items/!/!!this.slug!!" class="product shadow-sm text-center">
+		<img src="!!this.src!!" class="mw-100" style="pointer-events: none;" />
+		<!--div class="color-block w-100" style="background: !!this.color!!"></div-->
+		<div class="details">
+			<div class="h-100 d-flex justify-content-center align-items-center text-dark">
+				<div class="text-center p-4">
+					<h4>
+						<b>!!Currency::sym()!!!!this.price!!</b>
+						!!if this['discount']!!
+							<span style="font-size: medium;">
+								<del>!!Currency::sym()!!!!this.oprice!!</del>
+							</span>
+						!!endif!!
+					</h4>
+					<br/>
+					<h5 class="text-capitalize">!!this.title!!</h5>
+					<br/>
+					<h5>
+						<b>!!this.size!!</b>
+					</h5>
+				</div>
+			</div>
+		</div>
+	</a>
+</div>
+!!endfor!!
+!!if error==1!!
+	<div class="col-12 text-center bg-light py-5 border mt-4">
+		<h4>
+			<i class="fa fa-times text-danger fa-2x"></i>
+		</h4>
+		<h2>
+			Not Found
+		</h2>
+		<br/>
+		<i>you might wanna check your spelling and try again. Help us by creating an image request ticket <a href="!!F::route('request-image')!!">here</a>. Thank you</i>
+	</div>
+!!endif!!

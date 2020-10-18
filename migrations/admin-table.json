@@ -1,0 +1,25 @@
+"create": {
+	"admins": {
+		"id": {
+			"type": "int",
+			"primary": true,
+			"auto_increment": true
+		},
+		"username": {
+			"type": "varchar",
+			"length": 20
+		},
+		"password": {
+			"type": "varchar",
+			"length": 100
+		},
+		"last_login": {
+			"type": "datetime",
+			"length": 1
+		},
+		"capability": {
+			"type": "varchar",
+			"length": 300
+		}
+	}
+}

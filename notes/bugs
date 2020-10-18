@@ -1,0 +1,8 @@
+else-if template tag
+if cannot check for negativity
+stand-alone logic run in templates
+data filtering ammendments
+	- where should take only two arguments
+	- where instances for other db methods should be changed
+if template tag should parse its content only when true
+if cannot use dot notation reference

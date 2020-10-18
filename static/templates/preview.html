@@ -1,0 +1,30 @@
+<div id="img-preview" class="position-fixed h-100 w-100 d-none text-center p-4" style="top: 0; left: 0; background: rgba(189,222,0,0.7); z-index: 99999999;">
+	<div class="d-inline-block mh-100 mw-100" style="overflow: auto;">
+		<img src="!!data.src!!" style="pointer-events: none;" />
+	</div>
+	<button onclick="closePreview();" class="btn btn-sm btn-dark position-fixed" style="right: 15px; top: 15px;">
+		close <i class="fa fa-times text-danger"></i>
+	</button>
+</div>
+
+<script type="text/javascript">
+	function launchPreview(){
+		$('html').toggleClass('overflow-hidden');
+		$('#img-preview').toggleClass('d-none');
+
+		hm = $('#img-preview')[0].getBoundingClientRect().height;
+		h = $('#img-preview>div')[0].getBoundingClientRect().height;
+		console.log(h<hm-48);
+		if( h<hm-48  ){
+			$('#img-preview').removeClass('p-4');
+			$('#img-preview>div').addClass('d-flex');
+			$('#img-preview>div').addClass('h-100');
+			$('#img-preview>div').addClass('align-items-center');
+			$('#img-preview>div').addClass('justify-content-center');
+		}
+	}
+	function closePreview(){
+		$('html').toggleClass('overflow-hidden');
+		$('#img-preview').toggleClass('d-none');
+	}
+</script>

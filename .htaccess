@@ -1,0 +1,23 @@
+# BEGIN SPHP
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_FILENAME} !migrations/seeder.php
+RewriteCond %{REQUEST_FILENAME} !migrations/migrate.php
+RewriteRule ^migrations/([^/]+)/?$ migrations/migrate.php?f=$1 [NC]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php [L]
+
+RewriteCond %{REQUEST_FILENAME} config\.json
+RewriteCond %{REQUEST_FILENAME} !migrations/migrate.php
+RewriteCond %{REQUEST_FILENAME} !migrations/seeder.php
+RewriteCond %{REQUEST_FILENAME} !index\.php
+RewriteCond %{REQUEST_FILENAME} \.php$
+RewriteRule ^(.*)$ index.php [L]
+
+</IfModule>
+
+# END SPHP

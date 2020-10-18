@@ -1,0 +1,46 @@
+<div id="checkout" class="fixed-top w-100 h-100 d-none" style="background: rgba(0,0,0,0.8); z-index: 999999;">
+	<!--div class="w-100 h-100 d-flex justify-content-center align-items-center">
+		<div class="w-100 bg-light rounded p-3 text-center" style="max-width: 360px;">
+			<div id="paystackEmbedContainer"></div>
+		</div>
+	</div>
+	<button onclick="Checkout();" class="btn btn-sm btn-dark position-fixed" style="right: 15px; top: 15px;">
+		close <i class="fa fa-times text-danger"></i>
+	</button-->
+	<form>
+	  <script src="https://js.paystack.co/v1/inline.js"></script>
+	</form>
+</div>
+ 
+<script>
+  function payWithPaystack(){
+  	var amount = !!Cart::total()*100!!;
+  	if( Math.floor(amount) == 0 ){
+  		alert( 'Select images of no less 100NGN' );
+  		return Checkout(1);
+  	}
+
+    var handler = PaystackPop.setup({
+      key: 'pk_test_e1fda8a40c620b92d900a063a3df5afb806e95f4',
+      email: 'user-!!md5(sha1(F::sess('auth_user')))!!@haycube.com.ng',
+      amount: amount,
+      currency: '!!Currency::abbr()!!',
+      callback: function(response){
+          location.replace('!!F::route('cart/verify-payment?&trxref=')!!'+response.reference);
+      },
+      onClose: function(){
+          Checkout(1);
+      }
+    });
+    handler.openIframe();
+  }
+</script>
+<script>
+	function Checkout( mode ){
+		$('html').toggleClass('overflow-hidden');
+		$('#checkout').toggleClass('d-none');
+		if( !mode ) {
+			payWithPaystack();
+		}
+	}
+</script>

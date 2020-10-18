@@ -1,0 +1,7 @@
+- general
+- migrations
+- functions modularisation
+- template engine standardization
+- additional functions
+- enhanced security
+- testing & performance

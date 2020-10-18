@@ -1,0 +1,319 @@
+!!uses=layout!!
+
+!!block title!!
+	Haybe PhotoStudio
+!!endblock!!
+
+!!block content!!
+	!!include=header!!
+
+	<div class="row p-4 p-md-5">
+		<div class="col-12">
+			<div id="filter" class="collapse mb-5 bg-light border rounded p-4">
+				<h3>
+					<b>Filter</b>
+				</h3>
+				<br/>
+				!!var sizeof=sizeof($this->Template_Data['filters'])!!
+				<form action="!!F::route('forms/filter')!!" class="w-100" autocomplete="off" onsubmit="checkCustoms();">
+					<div class="form-row">
+						<div class="col-md-1">
+							<h5>Items</h5>
+							<hr/>
+							<span class="form-check">
+								<input type="radio" name="per_page" class="form-check-input" value="15" checked />
+								<label class="form-check-label">15</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="per_page" class="form-check-input" value="30" !!if sizeof && filters['per_page']==30!! checked !!endif!! />
+								<label class="form-check-label">30</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="per_page" class="form-check-input" value="60" !!if sizeof && filters['per_page']==60!! checked !!endif!! />
+								<label class="form-check-label">60</label>
+							</span>
+						</div>
+						<div class="col-md-1">
+							<h5>Sort</h5>
+							<hr/>
+							<span class="form-check">
+								<input type="radio" name="sort" class="form-check-input" value="title" checked />
+								<label class="form-check-label">Name</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="sort" class="form-check-input" value="price" !!if sizeof && filters['sort']=='price'!! checked !!endif!! />
+								<label class="form-check-label">Price</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="sort" class="form-check-input" value="date" !!if sizeof && filters['sort']=='date'!! checked !!endif!! />
+								<label class="form-check-label">Date</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="sort" class="form-check-input" value="type" !!if sizeof && filters['sort']=='type'!! checked !!endif!! />
+								<label class="form-check-label">Type</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="sort" class="form-check-input" value="size" !!if sizeof && filters['sort']=='size'!! checked !!endif!! />
+								<label class="form-check-label">Size</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="sort" class="form-check-input" value="random" !!if sizeof && filters['sort']=='random'!! checked !!endif!! />
+								<label class="form-check-label">Random</label>
+							</span>
+						</div>
+						<div class="col-12 col-md-2">
+							<h5>Pricing</h5>
+							<hr/>
+							<div class="mb-3">
+								Min (!!Currency::sym()!!): &nbsp;<input type="number" name="min_pricing" !!if sizeof!! value="!!filters.min_pricing!!" !!endif!! value="0" class="" />
+							</div>
+							<div class="">
+								Max (!!Currency::sym()!!): &nbsp;<input type="number" name="max_pricing" !!if sizeof!! value="!!filters.max_pricing!!" !!endif!! value="5000" min="1" class="" />
+							</div>
+						</div>
+						<div class="col-md-3">
+							<h4=5>Discount</h5>
+							<hr/>
+							<span class="form-check">
+								<input type="radio" name="discount" value="0" class="form-check-input" checked />
+								<label class="form-check-label">0% and above</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="discount" value="10" class="form-check-input" !!if sizeof && filters['discount']==10!! checked !!endif!! />
+								<label class="form-check-label">10% and above</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="discount" value="50" class="form-check-input" !!if sizeof && filters['discount']==50!! checked !!endif!! />
+								<label class="form-check-label">50% and above</label>
+							</span>
+							<span class="form-check">
+								<input type="radio" name="discount" value="80" class="form-check-input" !!if sizeof && filters['discount']==80!! checked !!endif!! />
+								<label class="form-check-label">80% and above</label>
+							</span>
+							<input type="text" name="discount" placeholder="custom discount e.g 40-50" class="mt-2 mw-100" !!if sizeof && filters['discount']!=('80'||'50'||'10'||'0')!! value="!!filters.discount!!" !!endif!! />
+						</div>
+						<div class="col-md-2">
+							<h5>Size</h5>
+							<hr/>
+							<span class="form-check">
+								!!var size_icon=(int)isset($this->Template_Data['filters']['size_icon'])!!
+								<input type="checkbox" name="size_icon" class="form-check-input" value="1" !!if size_icon==1!! checked !!endif!! />
+								<label class="form-check-label">Icon</label>
+							</span>
+							<span class="form-check">
+								!!var size_small=(int)isset($this->Template_Data['filters']['size_small'])!!
+								<input type="checkbox" name="size_small" class="form-check-input" value="1" !!if size_small==1!! checked !!endif!! />
+								<label class="form-check-label">Small</label>
+							</span>
+							<span class="form-check">
+								!!var size_medium=(int)isset($this->Template_Data['filters']['size_medium'])!!
+								<input type="checkbox" name="size_medium" class="form-check-input" value="1" !!if size_medium==1!! checked !!endif!! />
+								<label class="form-check-label">Medium</label>
+							</span>
+							<span class="form-check">
+								!!var size_large=(int)isset($this->Template_Data['filters']['size_large'])!!
+								<input type="checkbox" name="size_large" class="form-check-input" value="1" !!if size_large==1!! checked !!endif!! />
+								<label class="form-check-label">Large</label>
+							</span>
+							<input type="text" name="size_cx" placeholder="custom e.g h>500,w<600" class="mt-2 mw-100" !!if sizeof!! value="!!filters.size_cx!!" !!endif!! />
+						</div>
+						<div class="col-md-3">
+							<h5>Extras</h5>
+							<hr/>
+							<div class="d-flex flex-wrap align-items-center">
+								!!for ex_filters!!
+								<span class="form-check mr-4">
+									!!var in=(int)isset($this->Template_Data['filter_ex'][$this->Template_Data['ithis']])!!
+									<input type="checkbox" name="!!ithis!!" class="form-check-input" value="1" !!if in==1!! checked !!endif!! />
+									<label class="form-check-label">!!this!!</label>
+								</span>
+								!!endfor!!
+							</div>
+						</div>
+						<!--div class="col-12 col-md-6 mt-4">
+							<h4>Color</h4>
+							<hr/>
+							<div id="color-container" class="d-flex flex-wrap justify-content-between align-items-center">
+								<span class="color-block selected bg-success m-1">
+									<i class="color-block-icon fa fa-check"></i>
+								</span>
+							</div>
+						</div-->
+						<div class="col-12 mt-4">
+							<button name="__init__" class="btn btn-dark white-text">
+								DONE
+							</button>
+							<a href="!!F::route('forms/filter?clear')!!" class="btn btn-danger white-text">
+								CLEAR FILTERS
+							</a>
+						</div>
+					</div>
+					<input type="hidden" name="keyword" id="keyword" />
+				</form>
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="input-group align-items-center" style="">
+				<input type="search" name="search" class="form-control form-control-lg border-0 shadow-sm bg-light" placeholder="Keyword..." style="height: 4rem" onchange="$('#keyword').val(this.value);" onkeyup="prepareSearch(this.value);" value="!!keyword!!" />
+				<div class="input-group-append">
+					<button data-toggle="collapse" data-target="#filter" class="btn btn-dark btn-lg" style="height: 4rem">
+						filter &nbsp;<small><i class="fa fa-chevron-up"></i></small>
+					</button>
+				</div>
+			</div>
+			<div id="collection" class="row mt-4">
+				!!include=collection!!
+			</div>
+			<div id="loader" class="text-center bg-light py-5 border mt-4 mt-md-5">
+				<h4>
+					<i class="fa fa-circle-notch fa-spin"></i>
+				</h4>
+				<h2>
+					Loading...
+				</h2>
+				<br/>
+				<small>
+					<i>[<font id="state">making request</font>]</i>
+				</small>
+			</div>
+			<div id="error" class="text-center bg-light py-5 border mt-4 mt-md-5">
+				<h4>
+					<i class="fa fa-times text-danger fa-2x"></i>
+				</h4>
+				<h2>
+					An Error Occurred
+				</h2>
+				<br/>
+				<i>feel free to try again. If it persists, <a href="!!F::route('contact')!!">contact</a> our webmasters</i>
+			</div>
+		</div>
+		<div class="col-12 mt-4 text-center mb-4">
+			!!page!!
+		</div>
+	</div>
+
+	!!include=footer!!
+!!endblock!!
+
+!!block style!!
+	.color-block {
+		width: 40px;
+		height: 40px;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: transform .2s;
+	}
+	.color-block:hover {
+		transform: translateY(-8px);
+	}
+	.color-block:not(.selected) .color-block-icon {
+		display: none;
+	}
+	.color-block.selected{
+		position: relative;
+	}
+	.color-block.selected .color-block-icon {
+		color: white;
+		font-size: 1.1em;
+		margin-top: .65em;
+		margin-left: .65em;
+	}
+	.color-block.selected::after{
+		position: absolute;
+		content: '';
+		top: 0; left: 0;
+		width: 100%; height: 100%;
+		background: rgba(0,0,0,0.1);
+		border-radius: 5px;
+	}
+	.product{
+		display: block;
+		text-decoration: none;
+		position: relative;
+		overflow: hidden;
+	}
+	.product .details{
+		position: absolute;
+		bottom: 0; left: 0;
+		width: 100%; height: 0%;
+		overflow: hidden;
+		background: rgba(189,222,0,0.7);
+	}
+	.product:hover .details{
+		animation: slideUp .5s forwards;
+	}
+	@keyframes slideUp{
+		from {
+			height: 0%;
+		}
+		to {
+			height: 100%;
+		}
+	}
+!!endblock!!
+
+!!block script!!
+	color_cont = document.getElementById("color-container");
+	function loadColors(){
+		html = "";
+		colors = [];
+		x=0;
+		while(true){
+			rgb = [0,0,0];
+			rgb[0] = Math.floor(Math.random()*250);
+			rgb[1] = Math.floor(Math.random()*250);
+			rgb[2] = Math.floor(Math.random()*250);
+			colors[x] = rgb;
+			if( colors.length>=50 ){
+				break;
+			}
+			x++;
+		}
+		console.log(colors);
+		colors.forEach(function(f){
+			html += '<span class="color-block selected m-1" color-value="" style="background-color: rgb('+f[0]+','+f[1]+','+f[2]+');"><i class="color-block-icon fa fa-check"></i></span>';
+		});
+		color_cont.innerHTML += html;
+	}
+	//loadColors();
+	function prepareSearch(keyword){
+		clearTimeout(window.searchTimeout);
+		window.searchTimeout = setTimeout(runSearch, 400);
+		window.searchKeyword = keyword;
+	}
+	function runSearch(){
+		$('#collection').removeClass('error');
+		$('#collection').addClass('loading');
+		t_start = Date.now();
+
+		JAX.GET("!!F::route('forms/search')!!", {k: window.searchKeyword}, "GET", function(data){
+			$('#state').text('setting data');
+			duration = 0;
+			if( Date.now()-t_start<1500 ){
+				duration = 1000;
+			}
+			setTimeout(function(){
+				completeSearchData(data);
+			}, duration);
+		}, function(error){
+			duration = 0;
+			if( Date.now()-t_start<=1500 ){
+				duration = 1000;
+			}
+			setTimeout(function(){
+				$('#collection').removeClass('loading');
+				$('#collection').addClass('error');
+			}, duration);
+		});
+	}
+	function completeSearchData(html){
+		$('#collection').removeClass('loading');
+		$('#collection').html( html );
+	}
+	function checkCustoms(){
+		el = $('input[type=text][name=discount]');
+		if(!el.val()){
+			el.prop('name', '');
+		}
+	}
+!!endblock!!

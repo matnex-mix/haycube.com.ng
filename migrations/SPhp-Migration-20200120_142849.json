@@ -1,0 +1,25 @@
+"create": {
+	"currency": {
+		"id": {
+			"type": "int",
+			"primary": true,
+			"auto_increment": true
+		},
+		"abbr": {
+			"type": "varchar",
+			"length": 10
+		},
+		"symbol": {
+			"type": "varchar",
+			"length": 2
+		},
+		"rate": {
+			"type": "double"
+		},
+		"last_update": {
+			"type": "datetime",
+			"length": 1,
+			"default": "CURRENT_TIMESTAMP"
+		}
+	}
+}
